@@ -6,6 +6,5 @@ class ProgramMain
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("123");
     }
 }
