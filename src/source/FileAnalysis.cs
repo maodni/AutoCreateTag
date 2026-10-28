@@ -4,28 +4,20 @@ namespace AutoCreateTag.source;
 
 public class ContentData
 {
-    public ContentData()
-    {
-        Comment = "";
-        OldTag = "";
-        NewTag = "";
-        Type = "";
-    }
-
     //原始数据
-    public string OldTag;
+    public string OldTag { get; set; } = "";
 
     //处理后的数据
-    public string NewTag;
+    public string NewTag { get; set; } = "";
 
     //用来划分区域的数据,取标签的前2段
-    public string Type;
+    public string Type { get; set; } = "";
 
     //说明
-    public string Comment;
+    public string Comment { get; set; } = "";
 }
 
-public struct FileAnalysis
+public static class FileAnalysis
 {
     //文件解析,提取内容
 
@@ -48,6 +40,10 @@ public struct FileAnalysis
                 cacheStrList = cacheStr.Split('=');
             }
 
+            if (cacheStrList.Length <= 0)
+            {
+                return false;
+            }
 
             outData.Comment = cacheStrList.Last().Substring(1, cacheStrList.Last().Length - 3);
 
@@ -76,10 +72,7 @@ public struct FileAnalysis
             return true;
         }
 
-        outData.OldTag = "";
-        outData.NewTag = "";
-        outData.Type = "";
-        outData.Comment = "";
+        outData = null;
         return false;
     }
 }
